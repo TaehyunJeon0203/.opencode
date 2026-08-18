@@ -42,3 +42,4 @@ Start narrow: focused test/reproduction -> type/static check -> lint -> broader 
 
 ## Git safety
 Do not commit/push unless asked. Do not force-push, hard reset, clean untracked files, rewrite history or discard unrelated work unless explicitly requested.
+When creating commit messages, keep conventional prefixes such as `feat:`, `fix:`, `chore:`, and `docs:`; write the description after the prefix in Korean.
