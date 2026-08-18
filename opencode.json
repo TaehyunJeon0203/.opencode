@@ -3,6 +3,13 @@
   "default_agent": "orchestrator",
   "subagent_depth": 1,
   "share": "manual",
+  "mcp": {
+    "figma": {
+      "type": "remote",
+      "url": "https://mcp.figma.com/mcp",
+      "enabled": true
+    }
+  },
   "permission": {
     "read": {"*":"allow","*.env":"deny","*.env.*":"deny","*.env.example":"allow"},
     "bash": {
