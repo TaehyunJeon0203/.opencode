@@ -22,6 +22,12 @@ This is a role-based engineering harness. Delegate when specialization adds valu
 
 The default `orchestrator` may handle tiny tasks directly.
 
+## Communication language
+- Use English for all communication between the orchestrator and subagents, and between subagents.
+- Use Korean only when communicating directly with the user.
+- Preserve user-facing Korean when passing user context internally, but write the internal request, findings, plans, and handoffs in English.
+- Keep internal communication concise: omit unnecessary articles and words, but never simplify enough to distort meaning.
+
 ## Fallback policy
 OpenCode currently documents one `model` per agent, not an ordered model array. This harness implements fallback with alternate subagents.
 
