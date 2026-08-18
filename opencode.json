@@ -1,0 +1,17 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "orchestrator",
+  "subagent_depth": 1,
+  "share": "manual",
+  "permission": {
+    "read": {"*":"allow","*.env":"deny","*.env.*":"deny","*.env.example":"allow"},
+    "bash": {
+      "*":"ask",
+      "git status*":"allow","git diff*":"allow","git log*":"allow","git show*":"allow","git branch*":"allow","git rev-parse*":"allow","git ls-files*":"allow",
+      "npm run *":"allow","npm test*":"allow","npx tsc*":"allow","python manage.py test*":"allow","python -m pytest*":"allow","pytest*":"allow",
+      "docker compose ps*":"allow","docker compose logs*":"allow","docker ps*":"allow",
+      "git commit*":"ask","git push*":"ask","git reset --hard*":"deny","git clean *":"deny","rm -rf *":"deny","sudo *":"ask"
+    },
+    "external_directory":"ask","doom_loop":"ask"
+  }
+}
