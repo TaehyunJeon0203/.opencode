@@ -13,11 +13,11 @@
   "permission": {
     "read": {"*":"allow","*.env":"deny","*.env.*":"deny","*.env.example":"allow"},
     "bash": {
-      "*":"ask",
-      "git status*":"allow","git diff*":"allow","git log*":"allow","git show*":"allow","git branch*":"allow","git rev-parse*":"allow","git ls-files*":"allow",
+      "*":"allow",
+      "git status*":"allow","git diff*":"allow","git log*":"allow","git show*":"allow","git branch --list*":"allow","git branch -a*":"allow","git branch -r*":"allow","git branch -vv*":"allow","git rev-parse*":"allow","git ls-files*":"allow","git remote -v*":"allow","git remote show*":"allow","git tag -l*":"allow","git tag --list*":"allow","git describe*":"allow","git grep*":"allow","git blame*":"allow","git reflog show*":"allow","git shortlog*":"allow","git count-objects*":"allow","git config --get*":"allow","git check-ignore*":"allow","git worktree list*":"allow",
       "npm run *":"allow","npm test*":"allow","npx tsc*":"allow","python manage.py test*":"allow","python -m pytest*":"allow","pytest*":"allow",
       "docker compose ps*":"allow","docker compose logs*":"allow","docker ps*":"allow",
-      "git commit*":"ask","git push*":"ask","git reset --hard*":"deny","git clean *":"deny","rm -rf *":"deny","sudo *":"ask"
+      "git commit*":"ask","git push*":"ask","git reset*":"ask","git clean *":"deny","git checkout --*":"ask","git restore*":"ask","rm -rf *":"deny","rm *":"ask","sudo *":"ask","chmod *":"ask","chown *":"ask","dd *":"ask","mkfs*":"ask","diskutil *":"ask","shutdown*":"ask","reboot*":"ask","kill *":"ask","pkill *":"ask"
     },
     "external_directory":"ask","doom_loop":"ask"
   }
