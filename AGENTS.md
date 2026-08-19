@@ -22,6 +22,8 @@ This is a role-based engineering harness. Delegate when specialization adds valu
 
 The default `orchestrator` may handle tiny tasks directly.
 
+When a request is vague, incomplete, or ambiguous enough to affect implementation, load and follow the `deep-interview` skill before editing. Ask one question at a time, offer 2–3 choices plus direct input, and mark recommendations when appropriate.
+
 ## Communication language
 - Use English for all communication between the orchestrator and subagents, and between subagents.
 - Use Korean only when communicating directly with the user.
