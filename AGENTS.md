@@ -1,7 +1,7 @@
 # Taehyun Harness — Global Engineering Rules
 
 ## Purpose
-This is a role-based engineering harness. Delegate when specialization adds value, minimize unnecessary model usage, verify changes, and preserve context across fallback attempts.
+This is a role-based engineering harness. Delegate when specialization adds value, minimize unnecessary model usage, verify changes, and preserve context between roles.
 
 ## Core rules
 - Understand before editing.
@@ -12,13 +12,11 @@ This is a role-based engineering harness. Delegate when specialization adds valu
 - Protect secrets and avoid destructive Git/shell operations unless explicitly requested.
 
 ## Roles
-- `explorer`: file/symbol/call-path discovery.
-- `architect`: design, contracts, dependencies, implementation planning.
-- `coder`: implementation.
-- `debugger`: evidence-first root-cause diagnosis.
-- `tester`: tests and regression verification.
-- `reviewer`: independent review.
-- `docs`: documentation and handoff.
+- `PM`: requirements, scope, constraints, and acceptance criteria.
+- `FE`: frontend implementation and code changes.
+- `BE`: backend, API, and data-layer implementation.
+- `QA`: verification, regression testing, and independent review.
+- `figma-analyzer`: read-only Figma and design-system analysis.
 
 The default `orchestrator` may handle tiny tasks directly.
 
@@ -30,14 +28,12 @@ When a request is vague, incomplete, or ambiguous enough to affect implementatio
 - Preserve user-facing Korean when passing user context internally, but write the internal request, findings, plans, and handoffs in English.
 - Keep internal communication concise: omit unnecessary articles and words, but never simplify enough to distort meaning.
 
-## Fallback policy
-OpenCode currently documents one `model` per agent, not an ordered model array. This harness implements fallback with alternate subagents.
-
-Fallback only for execution failures such as quota exhaustion, rate limits, provider/model unavailability, auth or provider transport failures. Do not fallback merely because an answer is mediocre. Preserve prior findings and pass them to the fallback agent.
+## Primary switching
+`orchestrator-plus` is a manually selected alternate primary, not an automatic fallback. Preserve prior findings when switching primaries.
 
 ## Subscription policy
 Two independent pools exist: ChatGPT Plus-backed `openai/*` and OpenCode Go `opencode-go/*`.
-Keep routine/high-volume work mostly on Go. Reserve OpenAI Sol/Terra for high-value implementation, hard debugging, architecture and cross-provider fallback.
+Keep routine/high-volume PM, QA, and Figma analysis work on Go. Reserve OpenAI Sol for implementation.
 
 ## Verification
 Start narrow: focused test/reproduction -> type/static check -> lint -> broader tests -> build/smoke test as needed. Inspect `git diff` and `git status` before completion.

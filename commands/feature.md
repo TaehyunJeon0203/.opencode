@@ -5,4 +5,4 @@ agent: orchestrator
 
 Implement: $ARGUMENTS
 
-Delegate proportionally and use documented fallback only for provider/model execution failure.
+Delegate proportionally across PM, Figma analyzer, FE, and QA as the work requires.

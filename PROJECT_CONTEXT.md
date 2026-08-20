@@ -4,7 +4,7 @@
 This is the handoff document for any agent continuing development of this harness. It is not an application; it is a reusable personal OpenCode configuration intended for `~/.config/opencode/`.
 
 ## Owner goal
-Build a personal coding-agent harness that separates engineering responsibilities, uses existing subscriptions efficiently, survives individual model/provider quota or availability failures where OpenCode permits, stays understandable, and ships a Korean reference mirror.
+Build a personal coding-agent harness that separates product requirements, implementation, verification, and Figma analysis, uses existing subscriptions efficiently, stays understandable, and ships a Korean reference mirror.
 
 ## Known user provider pools
 The user supplied `opencode models` on 2026-08-19.
@@ -22,7 +22,7 @@ Free `opencode/*` models were visible too, but v2 does not rely on them for crit
 Created global engineering rules, safe permissions, architect/coder/debugger/reviewer agents, feature/fix/review commands, React/Django/Docker/Git skills, and a `kr/` mirror. v1 did not assign models.
 
 ### Why v2
-The user required role-specific model assignment plus fallback and subscription-usage balancing.
+The user required role-specific model assignment and subscription-usage balancing.
 
 ## Official OpenCode findings verified for v2
 Checked current official docs on 2026-08-19:
@@ -36,42 +36,36 @@ Checked current official docs on 2026-08-19:
 8. Commands can select one agent and one model.
 9. Official Agents/Config/Models docs did not document an ordered model fallback array.
 
-Therefore do not invent unsupported syntax such as a YAML list under `model`. Each fallback is a real alternate subagent with a different model.
-
 ## Architecture
 ```text
 User
   -> orchestrator (Go Luna, primary)
-      -> explorer
-      -> architect
-      -> coder
-      -> debugger
-      -> tester
-      -> reviewer
-      -> docs
-          -> on specialist execution failure, retry documented fallback subagent
+       -> PM
+       -> FE
+       -> BE
+       -> QA
+      -> figma-analyzer
 ```
 
 `orchestrator-plus` is an alternate OpenAI Luna primary for provider-wide Go failure/exhaustion.
 
 ## Important limitation
-This is prompt/Task-level failover, not a guaranteed transport-layer automatic failover. If the CURRENT primary orchestrator cannot generate any response because its provider is unavailable or exhausted, the user must switch to the alternate primary. Do not describe that manual switch as automatic fallback.
+Primary switching is manual, not transport-layer automatic failover. If the current primary orchestrator cannot generate a response because its provider is unavailable or exhausted, the user must select the alternate primary. Do not describe that manual switch as automatic fallback.
 
 ## Routing philosophy
-- Go: orchestration, exploration, tests, docs, independent review and most repeated calls.
-- OpenAI Sol: primary implementation and hard debugging.
-- OpenAI Terra: architecture and strong cross-provider reviewer fallback.
-- OpenAI Luna: inexpensive cross-provider fallback/emergency orchestrator.
+- Go: orchestration, product requirements, backend implementation, verification, Figma analysis, and most repeated calls.
+- OpenAI Sol: implementation.
+- OpenAI Luna: manually selected alternate orchestrator.
 
 See `MODEL_ROUTING.md` for exact routes.
 
 ## Files
 - `opencode.json`: global safety/defaults.
 - `AGENTS.md`: global engineering behavior.
-- `agents/`: primary, specialist and hidden fallback agents.
+- `agents/`: two primary orchestrators and four leaf subagents.
 - `commands/`: common workflows.
 - `skills/`: reusable stack guidance.
-- `MODEL_ROUTING.md`: model/fallback design.
+- `MODEL_ROUTING.md`: model routing design.
 - `PROJECT_CONTEXT.md`: this handoff.
 - `kr/`: structural Korean reference mirror.
 
@@ -83,14 +77,13 @@ See `MODEL_ROUTING.md` for exact routes.
 5. Update the matching `kr/` file whenever an active text/config file changes.
 6. Keep translated agents/skills under `kr/` so they are not discovered as active duplicates.
 7. Preserve safe Git/shell permissions.
-8. Document fallback semantics and limitations precisely.
-9. Never call manual provider switching automatic fallback.
+8. Never call manual provider switching automatic fallback.
 
 ## Not yet implemented
 - dynamic routing from real remaining subscription usage,
 - verified transport-level plugin fallback,
 - usage/cost telemetry,
-- security/performance specialist agents,
+- additional specialist agents,
 - repository-specific model benchmarking.
 
 Only add these after verifying current OpenCode capabilities.

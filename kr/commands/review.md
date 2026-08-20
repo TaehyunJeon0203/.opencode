@@ -1,6 +1,6 @@
 ---
 description: Independently review current changes
-agent: reviewer
+agent: QA
 subtask: true
 ---
 

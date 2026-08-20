@@ -1,16 +1,15 @@
-# 모델 라우팅 및 Fallback 정책
+# 모델 라우팅
 
 2026-08-19 사용자의 `opencode models` 출력 기준.
 
-| 역할 | Primary | Fallback 1 | Fallback 2 |
+| Agent | Mode | Model | 책임 |
 |---|---|---|---|
-| Orchestrator | `opencode-go/gpt-5.6-luna` | `openai/gpt-5.6-luna` primary로 수동 전환 | — |
-| Explorer | `opencode-go/gpt-5.6-luna` | `openai/gpt-5.6-luna` | — |
-| Architect | `openai/gpt-5.6-terra` | `opencode-go/glm-5.2` | — |
-| Coder | `openai/gpt-5.6-sol` | `opencode-go/kimi-k2.7-code` | `opencode-go/deepseek-v4-pro` |
-| Debugger | `openai/gpt-5.6-sol` | `opencode-go/glm-5.3` | `opencode-go/deepseek-v4-pro` |
-| Tester | `opencode-go/kimi-k2.7-code` | `opencode-go/deepseek-v4-flash` | `openai/gpt-5.6-luna` |
-| Reviewer | `opencode-go/glm-5.3` | `openai/gpt-5.6-terra` | `opencode-go/qwen3.7-max` |
-| Docs | `opencode-go/mimo-v2.5-pro` | `openai/gpt-5.6-luna` | — |
+| `orchestrator` | primary (기본) | `opencode-go/gpt-5.6-luna` | 라우팅과 작은 작업 직접 처리 |
+| `orchestrator-plus` | primary (수동 전환) | `openai/gpt-5.6-luna` | Plus 기반 대체 오케스트레이션 |
+| `PM` | subagent | `opencode-go/glm-5.2` | 요구사항, 범위, 인수 조건 |
+| `FE` | subagent | `openai/gpt-5.6-sol` | frontend 구현과 코드 변경 |
+| `BE` | subagent | `opencode-go/deepseek-v4-pro` | backend, API, data-layer 구현 |
+| `QA` | subagent | `opencode-go/kimi-k2.7-code` | 검증, 회귀 테스트, 리뷰 |
+| `figma-analyzer` | subagent | `opencode-go/gpt-5.6-luna` | 읽기 전용 Figma 및 디자인 시스템 분석 |
 
-Go 공식 한도는 5시간 $12, 주 $30, 월 $60 가치 기준이다. 고빈도 작업은 저렴한 Go 모델을 쓰고 GLM-5.3은 reviewer/디버깅 fallback처럼 가치가 큰 호출에 집중한다. fallback은 실행 실패에만 적용한다. 현재 orchestrator 자체 provider가 실패하면 `orchestrator-plus`로 수동 전환해야 하므로 완전 자동 transport failover는 아니다.
+Go 공식 한도는 5시간 $12, 주 $30, 월 $60 가치 기준이다. 반복적인 PM, QA, Figma 분석에는 Go 모델을 사용하고 구현에는 OpenAI Sol을 사용한다. `orchestrator-plus`는 자동 fallback이 아니라 사용자가 선택하는 수동 primary 전환이다.

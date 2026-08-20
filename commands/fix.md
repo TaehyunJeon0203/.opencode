@@ -5,4 +5,4 @@ agent: orchestrator
 
 Diagnose and fix: $ARGUMENTS
 
-Do not patch blindly. Use debugger for non-obvious failures, then coder/tester/reviewer as appropriate.
+Do not patch blindly. Use FE for evidence-first diagnosis and implementation, then QA for verification as appropriate.

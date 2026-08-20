@@ -1,6 +1,6 @@
 ---
 description: Run focused verification and regression testing
-agent: tester
+agent: QA
 subtask: true
 ---
 
