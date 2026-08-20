@@ -6,7 +6,6 @@ temperature: 0.1
 steps: 30
 permission:
   edit: allow
-  bash: ask
   task: deny
   webfetch: deny
   "figma_*": deny
