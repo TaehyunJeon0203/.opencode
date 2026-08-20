@@ -6,7 +6,26 @@ temperature: 0.1
 steps: 30
 permission:
   edit: allow
-  bash: ask
+  bash:
+    "*": allow
+    "git commit*": ask
+    "git push*": ask
+    "git reset*": ask
+    "git clean *": ask
+    "git checkout --*": ask
+    "git restore*": ask
+    "rm *": ask
+    "rm -rf *": ask
+    "sudo *": ask
+    "chmod *": ask
+    "chown *": ask
+    "dd *": ask
+    "mkfs*": ask
+    "diskutil *": ask
+    "shutdown*": ask
+    "reboot*": ask
+    "kill *": ask
+    "pkill *": ask
   task:
     "*": deny
     "PM": allow
