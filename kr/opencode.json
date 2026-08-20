@@ -3,6 +3,10 @@
   "default_agent": "orchestrator",
   "subagent_depth": 1,
   "share": "manual",
+  "agent": {
+    "build": {"disable": true},
+    "plan": {"disable": true}
+  },
   "permission": {
     "read": {"*":"allow","*.env":"deny","*.env.*":"deny","*.env.example":"allow"},
     "bash": {
