@@ -38,6 +38,11 @@ Keep routine/high-volume PM, QA, and Figma analysis work on Go. Reserve OpenAI S
 ## Verification
 Start narrow: focused test/reproduction -> type/static check -> lint -> broader tests -> build/smoke test as needed. Inspect `git diff` and `git status` before completion.
 
+## Configuration scope
+- Apply configuration requests to this project's `opencode.json` and `.opencode/` first.
+- Never modify `~/.config/opencode` for a project-local request.
+- After a project-local configuration change, ask whether the user separately wants an equivalent global change.
+
 ## Git safety
 Do not commit/push unless asked. Do not force-push, hard reset, clean untracked files, rewrite history or discard unrelated work unless explicitly requested.
 When creating commit messages, keep conventional prefixes such as `feat:`, `fix:`, `chore:`, and `docs:`; write the description after the prefix in Korean.

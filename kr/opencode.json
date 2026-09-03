@@ -7,13 +7,20 @@
     "build": {"disable": true},
     "plan": {"disable": true}
   },
+  "mcp": {
+    "figma": {
+      "type": "remote",
+      "url": "https://mcp.figma.com/mcp",
+      "enabled": true
+    }
+  },
   "permission": {
     "read": {"*":"allow","*.env":"deny","*.env.*":"deny","*.env.example":"allow"},
     "bash": {
       "*":"allow",
-      "git commit*":"ask","git push*":"ask","git reset --hard*":"ask","git reset*":"ask","git clean *":"ask","git checkout --*":"ask","git restore*":"ask",
+      "git commit*":"ask","git push*":"ask","git reset*":"ask","git clean *":"ask","git checkout --*":"ask","git restore*":"ask",
       "rm *":"ask","rm -rf *":"ask","sudo *":"ask","chmod *":"ask","chown *":"ask","dd *":"ask","mkfs*":"ask","diskutil *":"ask","shutdown*":"ask","reboot*":"ask","kill *":"ask","pkill *":"ask"
     },
-    "external_directory":"ask","doom_loop":"ask"
+    "external_directory":"ask","doom_loop":"ask","question":"allow"
   }
 }

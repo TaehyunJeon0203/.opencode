@@ -33,9 +33,15 @@ Choose the least clear axis, in this order:
 - Carry the user's answer into the next question's current understanding.
 - Preserve uncertainty rather than inventing requirements.
 
+## Interaction method
+
+- Prefer OpenCode's `question` tool when it is available so the user can move through choices with the arrow keys and confirm with Enter.
+- Keep the tool's direct-input option available for answers outside the listed choices.
+- Fall back to the text format below when the `question` tool is unavailable or cannot represent the question clearly.
+
 ## Question format
 
-Use the user's language for the user-facing interview. For Korean users, use this structure:
+Use the user's language for the user-facing interview. For Korean users, use this fallback structure:
 
 ```text
 현재 이해: {concise summary of the request and decisions so far}
