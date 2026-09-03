@@ -3,6 +3,14 @@
 ## Read this first
 This is the handoff document for any agent continuing development of this harness. It is not an application; it is a reusable personal OpenCode configuration intended for `~/.config/opencode/`.
 
+## Current operating decisions
+- Active project path: `/Users/taehyunjeon/taehyun/dev/project/taehyun-opencode-harness-v2`.
+- Treat requests made in this project as project-local changes first.
+- After a project-local configuration change, ask whether the equivalent global change should be applied; never apply it automatically.
+- Keep `kr/` synchronized as the Korean reference mirror whenever active text or configuration changes.
+- `question: allow` is enabled in both project and global configuration; `deep-interview` prefers OpenCode's arrow-key/Enter question UI.
+- The similarly named `/Users/taehyunjeon/taehyun/dev/project/opencode` directory is not this harness and must not be used as the target.
+
 ## Owner goal
 Build a personal coding-agent harness that separates product requirements, implementation, verification, and Figma analysis, uses existing subscriptions efficiently, stays understandable, and ships a Korean reference mirror.
 
