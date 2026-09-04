@@ -23,5 +23,16 @@ v1에서 전역 규칙, permission, 여러 build specialist, feature/fix/review 
 ## 수정 규칙
 다음 에이전트는 이 파일, `MODEL_ROUTING.md`, `README.md`를 먼저 읽고 새 config key는 최신 공식 문서를 확인한다. 사용자가 새 모델 목록을 주지 않으면 확인된 모델 ID만 쓴다. Go 사용량 정책 변경 시 최신 공식 한도를 다시 확인한다. 활성 파일을 바꾸면 대응 `kr/` 파일도 갱신한다. 수동 provider 전환을 자동 fallback이라 부르지 않는다.
 
+## 다음 작업 큐
+새 세션을 시작할 때 다음 순서로 진행한다.
+1. `/report`로 실제 사용량 telemetry baseline을 만들고, 프롬프트나 세션 본문을 저장하지 않은 집계 결과를 최소 1주일 기록한다.
+2. findings, decisions, changed files, risks, verification, next action을 포함하는 간결한 에이전트 handoff 형식을 표준화한다. (완료: `/handoff`에 필수 형식을 정의했다.)
+3. 작업 복잡도(`tiny`, `standard`, `complex`)에 따른 라우팅을 추가해 작은 작업은 primary가 처리하고 전문화 효과가 있는 작업만 위임한다.
+4. baseline 데이터로 모델 라우팅을 조정하고 비용, 소요 시간, QA 재작업의 전후 결과를 문서화한다.
+5. 현재 plugin API를 확인한 뒤에만 로컬 telemetry 자동 수집과 루프 감지용 OpenCode plugin을 검토한다.
+6. 아키텍처 다이어그램, 설치 방법, 측정 사례, 데모, 개인정보·안전성 한계를 포함해 포트폴리오 형태로 패키징한다.
+
+첫 구현 단계는 완료했다. `scripts/opencode-report.py`와 `/report`가 로컬 OpenCode SQLite 데이터베이스를 읽기 전용으로 열어 세션, 비용, 토큰, 시간, 에이전트, 모델을 집계하며 프롬프트나 세션 본문은 출력하지 않는다. 전역 복사본은 `~/.config/opencode/` 아래에 있다.
+
 ## 미완료
-실제 잔여 구독량 기반 동적 라우팅, 검증된 transport-level plugin fallback, telemetry, 추가 specialist, 개인 repo 벤치마크는 아직 하지 않았다.
+실제 잔여 구독량 기반 동적 라우팅, 검증된 transport-level plugin fallback, 자동화된 telemetry baseline, 추가 specialist, 개인 repo 벤치마크는 아직 하지 않았다.

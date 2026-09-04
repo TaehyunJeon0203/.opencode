@@ -87,10 +87,21 @@ See `MODEL_ROUTING.md` for exact routes.
 7. Preserve safe Git/shell permissions.
 8. Never call manual provider switching automatic fallback.
 
+## Next work queue
+Prioritize these items in order when starting a new session:
+1. Establish a telemetry baseline from real usage with `/report`; record at least one week of aggregate results without storing prompts or session contents.
+2. Standardize agent handoffs with a compact template covering findings, decisions, changed files, risks, verification, and next action. (Completed: `/handoff` now defines the required format.)
+3. Add task-complexity routing (`tiny`, `standard`, `complex`) so small tasks stay with the primary agent and delegation is reserved for work that benefits from specialization.
+4. Use baseline data to tune model routing and document before/after cost, cycle-time, and QA-rework results.
+5. Investigate an OpenCode plugin for automatic local telemetry and loop detection only after verifying the current plugin API.
+6. Package the result for the portfolio: architecture diagram, install instructions, measured case study, demo, and privacy/safety limitations.
+
+The first implementation slice is complete: `scripts/opencode-report.py` and `/report` read the local OpenCode SQLite database in read-only mode and aggregate session, cost, token, duration, agent, and model data without printing prompts or session contents. The global copies live under `~/.config/opencode/`.
+
 ## Not yet implemented
 - dynamic routing from real remaining subscription usage,
 - verified transport-level plugin fallback,
-- usage/cost telemetry,
+- automated usage/cost telemetry baseline,
 - additional specialist agents,
 - repository-specific model benchmarking.
 
