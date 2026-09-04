@@ -13,6 +13,8 @@
 .idea/
 *.swp
 *.swo
+__pycache__/
+*.pyc
 
 # 임시 파일
 *.bak
