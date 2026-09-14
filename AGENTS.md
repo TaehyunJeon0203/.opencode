@@ -38,6 +38,14 @@ Keep routine/high-volume PM, QA, and Figma analysis work on Go. Reserve OpenAI S
 ## Verification
 Start narrow: focused test/reproduction -> type/static check -> lint -> broader tests -> build/smoke test as needed. Inspect `git diff` and `git status` before completion.
 
+## Automatic review loop
+- Every code change handled by a primary orchestrator must follow `implementation -> QA review -> fix -> QA re-review` without waiting for another user prompt.
+- QA is read-only. The orchestrator or the implementation agent that owns the affected area applies fixes; never ask QA to edit.
+- Count each QA review as one round. Stop after `PASS` or three rounds. At the cap, stop changing code and report every unresolved finding explicitly.
+- Do not claim completion before QA returns `PASS`, except when reporting unresolved findings after the three-round cap.
+- Each QA review checks requirements first, then diagnostics/tests and regression risk. It ends with explicit `PASS` or `FAIL` and includes only actionable findings with severity, confidence, and file/line evidence.
+- See `REVIEW_LOOP.md` for the runtime automation boundary and detailed handoff contract.
+
 ## Configuration scope
 - Apply configuration requests to this project's `opencode.json` and `.opencode/` first.
 - Never modify `~/.config/opencode` for a project-local request.

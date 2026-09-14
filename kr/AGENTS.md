@@ -38,6 +38,14 @@ ChatGPT Plus 기반 `openai/*`와 OpenCode Go `opencode-go/*`, 두 개의 독립
 ## 검증
 좁은 범위부터 시작한다: 집중 테스트·재현 -> 타입·정적 검사 -> 린트 -> 필요에 따라 광범위 테스트 -> 빌드·스모크 테스트. 완료 전에 `git diff`와 `git status`를 확인한다.
 
+## 자동 리뷰 루프
+- primary orchestrator가 다루는 모든 코드 변경은 추가 사용자 입력을 기다리지 않고 `구현 -> QA 리뷰 -> 수정 -> QA 재리뷰` 순서를 따른다.
+- QA는 읽기 전용이다. 영향 영역을 담당하는 구현 agent나 orchestrator가 수정하며 QA에게 파일 수정을 요청하지 않는다.
+- QA 리뷰 한 번을 한 round로 계산한다. `PASS` 또는 최대 3회에서 멈춘다. 상한에 도달하면 코드 수정을 중단하고 해결되지 않은 finding을 모두 명시적으로 보고한다.
+- QA가 `PASS`를 반환하기 전에는 완료를 주장하지 않는다. 단, 3회 상한 뒤 미해결 finding을 보고하는 경우는 예외다.
+- 각 QA 리뷰는 요구사항을 먼저 확인한 뒤 diagnostics/test와 regression 위험을 검토한다. 마지막에 명시적인 `PASS` 또는 `FAIL`을 적고 severity, confidence, 파일·라인 근거가 있는 수정 가능한 finding만 포함한다.
+- runtime 자동화 범위와 상세 handoff 계약은 `kr/REVIEW_LOOP.md`를 따른다.
+
 ## 설정 범위
 - 설정 요청은 이 프로젝트의 `opencode.json`과 `.opencode/`에 먼저 적용한다.
 - 프로젝트 범위 요청으로 `~/.config/opencode`를 수정하지 않는다.
