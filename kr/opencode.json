@@ -3,6 +3,7 @@
   "default_agent": "orchestrator",
   "subagent_depth": 1,
   "share": "manual",
+  "plugin": ["opencode-auto-fallback"],
   "agent": {
     "build": {"disable": true},
     "plan": {"disable": true}
